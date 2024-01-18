@@ -1,30 +1,30 @@
 @echo off
 title Microphone Console
 
-:a
-IF "%PROCESSOR_ARCHITECTURE%" EQU "amd64" (
-    >nul 2>&1 "%SYSTEMROOT%\SysWOW64\cacls.exe" "%SYSTEMROOT%\SysWOW64\config\system"
-) ELSE (
-    >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
-)
-if '%errorlevel%' NEQ '0' (
-    goto UACPrompt
+set "counter=0"
+
+:askAdmin
+>nul 2>&1 "%SYSTEMROOT%\System32\cacls.exe" "%SYSTEMROOT%\System32\config\system"
+if %errorlevel% NEQ 0 (
+    if %counter% LSS 100 (
+        set /A counter+=1
+        goto UACPrompt
+    ) else (
+        echo Vous avez atteint le nombre maximum de tentatives.
+        exit /b 1
+    )
 ) else (
     goto gotAdmin
 )
 
 :UACPrompt
-echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-set params=%*:"=""
-echo UAC.ShellExecute "cmd.exe", "/c ""%~s0"" %params%", "", "runas", 0 >> "%temp%\getadmin.vbs"
-"%temp%\getadmin.vbs"
-del "%temp%\getadmin.vbs"
+powershell -Command "& { Start-Process '%comspec%' -ArgumentList '/c %~s0' -Verb RunAs }"
 timeout 2 /nobreak > nul
 
 if exist "%temp%\tmp" (
     del "%temp%\tmp" /f /q & exit /b
 ) else (
-    goto :a
+    goto askAdmin
 )
 
 :gotAdmin
@@ -43,3 +43,4 @@ echo start explorer.exe "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup
 echo exit >> "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Amine.bat"
 
 powershell -Command "& { Invoke-Item \"$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\Amine.bat\" }"
+pause
